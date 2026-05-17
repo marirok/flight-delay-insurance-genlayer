@@ -194,10 +194,41 @@ result = contract.check_flight_and_payout("UA456")
 ## 📊 Test Results
 
 ```markdown
-✅ Scenario 1: Purchase Insurance - PASS
-✅ Scenario 2: Delayed Flight Payout - PASS (180 min delay → 100 USDC paid)
-✅ Scenario 3: On-Time Flight - PASS (no payout, as expected)
-✅ Scenario 4: Double Payout Prevention - PASS (rejected duplicate claim)
+## 📊 Simulator Test Results
+
+```text
+======================================================================
+✈️  Flight Delay Insurance Smart Contract - GenLayer Demo
+======================================================================
+📋 Config:   insurance_payout = 100 USDC   premium_cost = 10 USDC   min_delay_hours = 2
+----------------------------------------------------------------------
+🎫 Scenario 1: Purchase Insurance
+----------------------------------------------------------------------
+✅ Insurance purchased:   flight_number: IR123   passenger: 0xAliceWallet123   premium: 10 USDC   coverage: 100 USDC
+----------------------------------------------------------------------
+🔍 Scenario 2: Check Flight Status (Delayed - 3 hours)
+----------------------------------------------------------------------
+🔮 [GenLayer AI Query]   prompt: Check flight IR123 status...   min_validators: 3   validation_rules: strict   ✓ AI Response: delayed (180 min delay)
+💸 [PAYMENT] 100 USDC → 0xAliceWallet123
+📊 Result:   status: payout_success   message: Flight delayed by 180 minutes. Payout sent.   💰 payout: 100 USDC   ⏱️  delay: 180 minutes
+----------------------------------------------------------------------
+🔍 Scenario 3: Purchase & Check On-Time Flight
+----------------------------------------------------------------------
+🔮 [GenLayer AI Query]   prompt: Check flight IR789 status...   min_validators: 3   validation_rules: strict   ✓ AI Response: on_time (0 min delay)
+📊 Result:   status: no_payout   message: Flight on time or delay under 2 hours threshold.   delay: 0 minutes
+----------------------------------------------------------------------
+🚫 Scenario 4: Prevent Double Payout (should reject)
+----------------------------------------------------------------------
+✅ Double payout prevented:   message: Payout has already been claimed for this flight
+======================================================================
+📊 Test Summary
+======================================================================
+✅ Tests: 4/4 passed
+📈 Contract Stats:   Total policies: 2   Payouts processed: 1   Total USDC paid out: 100
+📢 Events Emitted:   Event(InsurancePurchased, {'flight_number': 'IR123', 'passenger': '0xAliceWallet123'})   Event(PayoutProcessed, {'flight_number': 'IR123', 'amount': 100})   Event(InsurancePurchased, {'flight_number': 'IR789', 'passenger': '0xBobWallet456'})
+======================================================================
+🎉 All GenLayer smart contract tests completed successfully!
+======================================================================
 ```
 
 ---

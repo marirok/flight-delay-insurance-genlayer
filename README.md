@@ -230,7 +230,26 @@ result = contract.check_flight_and_payout("UA456")
 🎉 All GenLayer smart contract tests completed successfully!
 ======================================================================
 ```
+---
 
+## 📊 Simulator Test Results & Logs
+
+| Scenario | Status | Details |
+| :--- | :---: | :--- |
+| **Scenario 1:** Purchase Insurance | ✅ **PASS** | Insurance policy registered under passenger wallet. |
+| **Scenario 2:** Delayed Flight Payout | ✅ **PASS** | AI Consensus confirmed 180 min delay ➔ **100 USDC paid**. |
+| **Scenario 3:** On-Time Flight | ✅ **PASS** | Flight was on time ➔ No payout processed, as expected. |
+| **Scenario 4:** Double Payout Prevention | ✅ **PASS** | Duplicate payout request was successfully blocked. |
+
+### 📈 Contract Analytics Summary
+
+```text
+✅ Tests: 4/4 passed
+
+📈 Contract Stats:
+   - Total Active/Processed Policies: 2
+   - Payouts Successfully Processed: 1
+   - Total USDC Paid Out via Engine: 100 USDC
 ---
 
 ## 🔮 The AI Magic (How IAgent.query Works)
